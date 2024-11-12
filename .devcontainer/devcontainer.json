@@ -19,5 +19,7 @@
     "3000": {
       "label": "nuxt3-app"
     }
-  }
+  },
+  "forwardPorts": [3000],
+  "postCreateCommand": "yarn install"
 }
