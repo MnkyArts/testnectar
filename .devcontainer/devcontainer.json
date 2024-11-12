@@ -1,54 +1,30 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.217.2/containers/docker-existing-dockerfile
 {
-  // The name of the container
   "name": "Bloktra Nectar",
-
-  // Several options surrounding the building process of the container image, such
-  // as the local, final command, context, etc...
-  "dockerFile": "Dockerfile",
-  "overrideCommand": false,
-  "build": {
-    "target": "dev"
-  },
-  "context": "..",
-  "runArgs": ["--env-file", ".env.docker"],
-
-  // Several options detailing where the project is located within the container and how
-  // it's mapped to the actual host machine
-  "workspaceMount": "source=${localWorkspaceFolder},target=/opt/app,type=bind,consistency=cached",
-  "workspaceFolder": "/opt/app/",
-
-  // The exposed ports and for what they used
-  "forwardPorts": [3000, 9229, 9230],
-  "portsAttributes": {
-    "3000": {
-      "label": "Application Port",
-      "onAutoForward": "notify"
-    },
-    "9229": {
-      "label": "Debug Port",
-      "onAutoForward": "silent"
-    },
-    "9230": {
-      "label": "Debug Port",
-      "onAutoForward": "silent"
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "remoteUser": "node",
+  "postCreateCommand": "sh .devcontainer/postCreateCommand.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "stylelint.vscode-stylelint",
+        "Vue.volar",
+        "Vue.vscode-typescript-vue-plugin"
+      ],
+      "settings": {
+        "editor.codeActionsOnSave": {
+          "source.fixAll": true
+        },
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "stylelint.enable": true,
+        "stylelint.snippet": ["css", "postcss", "scss", "vue"],
+        "stylelint.validate": ["css", "postcss", "scss", "vue"],
+        "typescript.preferences.importModuleSpecifier": "non-relative"
+      }
     }
-  },
-
-  // The suggested extensions for this project.
-  // Feel free to add or remove any extensions IDs as you see fit
-  "extensions": [
-    "octref.vetur",
-    "eg2.vscode-npm-script",
-    "christian-kohler.npm-intellisense",
-    "christian-kohler.path-intellisense",
-    "dbaeumer.vscode-eslint"
-  ],
-
-  // The command that should be run after the creation of the container
-  "postCreateCommand": ["npm", "install"],
-
-  // Which user VS code needs to use in order to execute shell commands within the container
-  "remoteUser": "node"
+  }
 }
