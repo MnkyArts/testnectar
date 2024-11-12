@@ -1,17 +1,20 @@
-FROM node:22.11
+ARG NODE_VERSION=20.18.0
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    bash \
-    && rm -rf /var/lib/apt/lists/*
+FROM node:${NODE_VERSION}-slim as base
 
-# Set working directory
-WORKDIR /workspace
+ENV NODE_ENV=development
 
-# Install dependencies after mounting the workspace
-COPY package.json package-lock.json ./
+WORKDIR /src
+
+# Build
+FROM base as build
+
+COPY --link package.json package-lock.json .
 RUN npm install
 
-# Expose port for Nuxt.js development server
-EXPOSE 3000
+# Run
+FROM base
+
+COPY --from=build /src/node_modules /src/node_modules
+
+CMD [ "npm", "run", "dev" ]
