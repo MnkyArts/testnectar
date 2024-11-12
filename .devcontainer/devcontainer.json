@@ -1,0 +1,20 @@
+{
+  "name": "Bloktra Nectar",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "octref.vetur"
+  ],
+  "postCreateCommand": "npm install",
+  "forwardPorts": [3000],
+  "remoteUser": "vscode",
+  "remoteEnv": {
+    "NUXT_PUBLIC_API_BASE": "http://your-api-url"
+  }
+}
