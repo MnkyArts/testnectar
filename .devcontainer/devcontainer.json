@@ -1,30 +1,23 @@
 {
   "name": "Bloktra Nectar",
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "app",
-  "workspaceFolder": "/workspace",
-  "remoteUser": "coder",
-  "postCreateCommand": "sh .devcontainer/postCreateCommand.sh",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20-bullseye",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
   "customizations": {
     "vscode": {
       "extensions": [
-        "esbenp.prettier-vscode",
-        "dbaeumer.vscode-eslint",
-        "stylelint.vscode-stylelint",
         "Vue.volar",
-        "Vue.vscode-typescript-vue-plugin"
-      ],
-      "settings": {
-        "editor.codeActionsOnSave": {
-          "source.fixAll": true
-        },
-        "editor.formatOnSave": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "stylelint.enable": true,
-        "stylelint.snippet": ["css", "postcss", "scss", "vue"],
-        "stylelint.validate": ["css", "postcss", "scss", "vue"],
-        "typescript.preferences.importModuleSpecifier": "non-relative"
-      }
+        "Nuxtr.nuxtr-vscode",
+        "bradlc.vscode-tailwindcss",
+        "GitHub.copilot",
+        "GitHub.copilot-chat"
+      ]
+    }
+  },
+  "portsAttributes": {
+    "3000": {
+      "label": "nuxt3-app"
     }
   }
 }
