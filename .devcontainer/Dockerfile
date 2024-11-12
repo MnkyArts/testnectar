@@ -1,6 +1,4 @@
-ARG NODE_VERSION=20.18.0
-
-FROM node:${NODE_VERSION}-slim as base
+FROM node:20.18.0-slim as base
 
 ENV NODE_ENV=development
 
